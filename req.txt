@@ -1,0 +1,15 @@
+este proyecto, debe ser en c#, code first, con bd sql server, hospedado en iis en un servidor propio.
+hay una tabla encuestas, que tiene encuesta_id y encuesta_nombre, se llama encuestas
+hay una tabla preguntas, encuesta_id, orden, pregunta (texto), tipo respuesta (puede ser combo, check o texto libre), valores (aplica si es combo o check y van delimitados por coma, si el texto incluye coma debe ir entre comillas. estos textos son las opciones que se le presentan al usuario, si es combo, solo una y si es check puede marcar varias, ej: "si, siempre", no, a veces .> aqui son tres posibles respuestas), otro campo tipo boolean, si es obligatorio u opcional.
+
+hay tres páginas, no requieren autenticación.
+
+preguntas.aspx?id=<encuesta_id>
+
+aqui muestra las preguntas y un campo para la respuesta.
+al darle finalizar se graban en la tabla respuestas y se muestra la pagina respuestas.aspx
+
+respyuestas.aspx?id?<respuesta_id>
+
+esta pagina debe estar lista para imprimir, debe incluir visiblemente las respuestas_id
+se muestra un listado de preguntas y respuestas, listas para imprimir, tambien se imprime un id_respuestas
