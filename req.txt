@@ -13,3 +13,67 @@ respyuestas.aspx?id?<respuesta_id>
 
 esta pagina debe estar lista para imprimir, debe incluir visiblemente las respuestas_id
 se muestra un listado de preguntas y respuestas, listas para imprimir, tambien se imprime un id_respuestas
+
+---
+
+## Objetivo
+Implementar una aplicación web en C# con enfoque Code First, base de datos SQL Server y despliegue en IIS que administre encuestas, preguntas y registro/imprimir de respuestas según los requerimientos proporcionados.
+
+## Plan de tareas
+
+### 1. Preparación del entorno
+- Instalar/validar Visual Studio con soporte para ASP.NET Web Forms o MVC, Entity Framework Code First y compatibilidad con SQL Server e IIS, más acceso al servidor donde se hospedará la aplicación.
+- Provisionar instancia de SQL Server (local o remota) y configurar IIS en el servidor objetivo, habilitando despliegue desde Visual Studio.
+
+### 2. Creación de la solución
+- Crear una solución ASP.NET Web Forms (o MVC si se prefiere) en C# dentro de Visual Studio, nombrando el proyecto de acuerdo a los lineamientos internos.
+- Configurar el proyecto para usar .NET Framework compatible con el hosting en IIS requerido.
+- Agregar paquetes necesarios (Entity Framework, herramientas de migraciones, etc.) para Code First.
+
+### 3. Modelado de datos (Code First)
+- Definir la entidad `Encuesta` con campos `EncuestaId` y `EncuestaNombre` siguiendo la estructura indicada.
+- Definir la entidad `Pregunta` con `PreguntaId`, `EncuestaId`, `Orden`, `Texto`, `TipoRespuesta`, `Valores`, `EsObligatoria`; establecer relaciones `Encuesta` ↔ `Preguntas` y restricciones para combos/checks basadas en los valores delimitados por coma.
+- Diseñar entidades para capturar respuestas (por ejemplo `Respuesta` y `RespuestaDetalle`) que guarden el identificador visible solicitado y permitan almacenar múltiples selecciones o textos libres según el tipo de pregunta.
+- Configurar `DbContext`, convenciones y `DbSet` correspondientes.
+
+### 4. Migraciones y base de datos
+- Habilitar migraciones de Entity Framework Code First.
+- Crear migraciones iniciales para generar tablas `Encuestas`, `Preguntas`, `Respuestas` y `RespuestaDetalles`.
+- Ejecutar migraciones contra SQL Server de desarrollo.
+- (Opcional) Implementar seeding de datos base para pruebas (encuestas y preguntas de ejemplo).
+
+### 5. Lógica de negocio y repositorios
+- Implementar servicios o repositorios para recuperar encuestas y preguntas por `EncuestaId`, respetando el orden configurado.
+- Implementar servicio para registrar respuestas, validar obligatoriedad y manejar tipos de pregunta (combo: única opción, check: múltiples, texto libre).
+- Generar identificador de respuesta (`RespuestaId`) que se mostrará en pantalla y permitirá consultar la impresión.
+
+### 6. Interfaz de usuario – `preguntas.aspx`
+- Construir página `preguntas.aspx` que reciba `id=<encuesta_id>` por query string, cargue la encuesta correspondiente y genere dinámicamente los controles adecuados por tipo de pregunta (drop-down, checkboxes, textbox).
+- Implementar validaciones de obligatoriedad en cliente/servidor.
+- Al pulsar “Finalizar”, persistir respuestas en la base de datos mediante los servicios creados y redirigir a `respuestas.aspx?id=<respuesta_id>`.
+
+### 7. Interfaz de usuario – `respuestas.aspx`
+- Construir página `respuestas.aspx` que reciba `id=<respuesta_id>`, cargue el registro de respuestas y lo presente en formato listo para imprimir, incluyendo visiblemente el identificador de respuesta.
+- Mostrar listado de preguntas con las respuestas correspondientes; manejar presentación de múltiples selecciones y textos libres.
+- Agregar estilos CSS específicos para impresión (p. ej., `@media print`) y un botón “Imprimir”.
+
+### 8. Seguridad y navegación
+- Asegurar que las páginas no requieran autenticación, pero validar parámetros de entrada y manejar errores (encuesta inexistente, respuesta inexistente).
+- Implementar una página de inicio o navegación mínima (opcional) que permita seleccionar encuestas disponibles.
+
+### 9. Pruebas y validación
+- Ejecutar pruebas funcionales manuales: completar encuestas con diferentes tipos de preguntas, validar obligatoriedad, verificar redirección, y confirmar formato imprimible.
+- Validar integridad de datos en SQL Server y revisar que las migraciones se aplican correctamente.
+- Revisar la experiencia de impresión en varios navegadores.
+
+### 10. Despliegue en IIS
+- Configurar perfiles de publicación en Visual Studio apuntando al servidor IIS propio.
+- Ajustar la cadena de conexión para el entorno de producción (web.config transform).
+- Publicar la aplicación en IIS, crear el sitio o aplicación virtual y probar acceso externo.
+
+### 11. Documentación y traspaso
+- Documentar estructura de base de datos, instrucciones de despliegue en IIS, y guía de uso de las páginas.
+- Registrar configuraciones clave (cadena de conexión, rutas en IIS) para futuras actualizaciones.
+
+## Testing
+⚠️ No se ejecutaron pruebas (actividad limitada a planificación y análisis estático).
