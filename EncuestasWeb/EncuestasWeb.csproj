@@ -1,0 +1,99 @@
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6BA55D6F-75B0-4B2C-AEC9-0CCBB9895CB7}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EncuestasWeb</RootNamespace>
+    <AssemblyName>EncuestasWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <UseGlobalApplicationHostFile>true</UseGlobalApplicationHostFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\EncuestasDbInitializer.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Encuesta.cs" />
+    <Compile Include="Models\EncuestasContext.cs" />
+    <Compile Include="Models\Pregunta.cs" />
+    <Compile Include="Models\Respuesta.cs" />
+    <Compile Include="Models\RespuestaDetalle.cs" />
+    <Compile Include="Preguntas.aspx.cs">
+      <DependentUpon>Preguntas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Preguntas.aspx.designer.cs">
+      <DependentUpon>Preguntas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Respuestas.aspx.cs">
+      <DependentUpon>Respuestas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Respuestas.aspx.designer.cs">
+      <DependentUpon>Respuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Preguntas.aspx" />
+    <Content Include="Respuestas.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+</Project>
